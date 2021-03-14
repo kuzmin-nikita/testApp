@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Главная";
+}
+
+<br />
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.Label("Я думаю, это:  ", new { @style = "white-space: pre-wrap;" });
+    @Html.TextBox("word", "Введите слово");
+    <input type="submit" value="Отправить" />
+}
+@{
+    for (int i = ViewBag.Results.Count - 1; i >= 0; i--)
+    {
+        if ((i % 2) == 0)
+        {
+            @Html.Label("Вы:  ", new { @style = "white-space: pre-wrap;" });
+        }
+        else
+        {
+            @Html.Label("Система:  ", new { @style = "white-space: pre-wrap;" });
+        }
+        @ViewBag.Results[i];
+        <br />
+    }
+}
+
+
+
