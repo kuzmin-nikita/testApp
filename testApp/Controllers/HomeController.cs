@@ -83,6 +83,7 @@ namespace testApp.Controllers
                 answer = "Верно. Поздравляю! Новое слово загадано.";
                 guessedWord = variants[new Random().Next(0, variants.Length)];
                 hintWord = guessedWord.ToCharArray();
+                errorsCounter = 0;
             }
             results.Add(word);
             results.Add(answer);
