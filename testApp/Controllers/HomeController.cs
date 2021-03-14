@@ -51,25 +51,25 @@ namespace testApp.Controllers
                         answer = "Угадана длина слова, и ";
                         int index = 0;
                         bool flag = false;
-                        foreach (char c in Session["hintWord"].ToString().ToCharArray())
+                        foreach (char c in Session["hintWord"].ToString())
                         {
                             if (c != ' ')
                             {
-                            flag |= true;
-                            }      
+                                flag |= true;
+                            }
                         }
                         if (flag)
                         {
                             do
                             {
                                 index = new Random().Next(0, Session["guessedWord"].ToString().Length);
-                            } while (Session["hintWord"].ToString().ToCharArray()[index] == ' ');
-                            answer += $"{index + 1}-ая буква слова - это {Session["hintWord"].ToString().ToCharArray()[index]}";
-                            Session["hintWord"].ToString().ToCharArray()[index] = ' ';
+                            } while (Session["hintWord"].ToString()[index] == ' ');
+                            answer += $"{index + 1}-ая буква слова - это {Session["hintWord"].ToString()[index]}";
+                            Session["hintWord"] = Session["hintWord"].ToString().Remove(index, 1).Insert(index, " ");
                         }
                         else answer += "подсказаны все буквы слова.";
-                }
-                Session["errorsCounter"] = 0;
+                    }
+                    Session["errorsCounter"] = 0;
                 }
                 //Ответ системы на неверное слово
                 else
