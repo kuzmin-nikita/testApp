@@ -6,7 +6,7 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
     @Html.Label("Я думаю, это:  ", new { @style = "white-space: pre-wrap;" });
-    @Html.TextBox("word", "Введите слово");
+    @Html.TextBox("word");
     <input type="submit" value="Отправить" />
 }
 @{

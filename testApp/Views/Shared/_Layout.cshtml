@@ -17,6 +17,16 @@
         </div>
     </div>
     <div class="container body-content">
+        @Html.Label("Угадайте слово из этого списка:  ", new { @style = "white-space: pre-wrap;" })
+        @{
+            string str = "";
+            foreach (string word in ViewBag.Words)
+            {
+                str += word + ", ";
+            }
+            str = str.Remove(str.Length-2, 2); 
+            @str
+        }
         @RenderBody()
         <hr />
         <footer>

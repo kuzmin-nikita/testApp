@@ -10,8 +10,8 @@ namespace testApp.Controllers
     public class HomeController : Controller
     {
         //Варианты загадываемых слов, загаданное слово, слово для подсказки
-        static string[] variants = { "привет", "пока", "яблоко", "клубника", "лес", "поле", "дом", "гараж", "собака", "кошка", "мама", "папа", "кофе", "чай" };
-
+        static string[] words = { "Привет", "Пока", "Яблоко", "Клубника", "Лес", "Поле", "Дом", "Гараж", "Собака", "Кошка", "Мама", "Папа", "Кофе", "Чай" };
+        
         //Ответы системы пользователю
         static string[] wrongAnswers =  {"Неверно.", "Подумай получше.", "Ты далёк от истины.", "Подумай ещё.",
             "Ну что так долго?", "И долго мы так будем?", "Я устал ждать.", "Ну сколько можно?"};
@@ -19,8 +19,9 @@ namespace testApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.Words = words;
             Session["results"] = new List<string>();
-            Session["guessedWord"] = variants[new Random().Next(0, variants.Length)];
+            Session["guessedWord"] = words[new Random().Next(0, words.Length)];
             string guessedWord = Session["guessedWord"].ToString();
             Session["hintWord"] = guessedWord;
             ViewBag.Results = Session["results"];
@@ -31,8 +32,9 @@ namespace testApp.Controllers
         [HttpPost]
         public ActionResult Index(string word)
         {
+            ViewBag.Words = words;
             string answer = "";
-            if (word.ToLower().Replace(" ", "") != Session["guessedWord"].ToString())
+            if (word.ToLower().Replace(" ", "") != Session["guessedWord"].ToString().ToLower())
             {
                 //Подсказка на каждую третью неверную попытку
                 if ((int)Session["errorsCounter"] == 2)
@@ -84,7 +86,7 @@ namespace testApp.Controllers
             else
             {
                 answer = "Верно. Поздравляю! Новое слово загадано.";
-                Session["guessedWord"] = variants[new Random().Next(0, variants.Length)];
+                Session["guessedWord"] = words[new Random().Next(0, words.Length)];
                 Session["hintWord"] = Session["guessedWord"].ToString().ToCharArray();
                 Session["errorsCounter"] = 0;
             }
